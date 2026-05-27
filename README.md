@@ -1,93 +1,77 @@
-🏢 Interní AI Asistent (RAG Prototyp)
+# Interní AI asistent KÚSK
 
-Prototyp interního AI asistenta postaveného na architektuře RAG (Retrieval-Augmented Generation), který umožňuje efektivní a bezpečné vyhledávání informací v rámci organizace.
+Lokální Streamlit aplikace pro interní dotazy nad znalostní bází a pro práci s PDF dokumenty. Projekt spojuje původní RAG asistenta `ai-asistent-kusk` a dokumentového asistenta `ai-pdf-assistant` do jedné aplikace.
 
-Aplikace běží plně lokálně, bez nutnosti odesílání citlivých dat do externích služeb.
+## Co aplikace umí
 
-🎯 Hlavní přínosy
-🔍 Rychlé vyhledávání informací
-(např. dovolená, interní směrnice, IT podpora)
-🔒 Ochrana dat
-Veškeré zpracování probíhá lokálně (GDPR-friendly)
-⚡ Snížení administrativní zátěže
-Odlehčení HR a IT oddělení od rutinních dotazů
-🧠 Jak systém funguje (RAG)
+- odpovídat česky podle interní znalostní báze v `data.json`,
+- nahrát PDF dokument a ptát se na jeho obsah,
+- vyhledat relevantní části PDF pomocí lokálních embeddings,
+- zobrazit použité úryvky dokumentu,
+- stáhnout poslední odpověď jako textový soubor,
+- běžet lokálně přes Ollama bez posílání dokumentů do cloudu.
 
-Aplikace využívá princip Retrieval-Augmented Generation:
+## Technologie
 
-Uživatel zadá dotaz
-Systém vyhledá relevantní informace v lokální znalostní bázi
-Vybraná data jsou předána jazykovému modelu jako kontext
-Model vygeneruje odpověď na základě těchto informací
+- Streamlit pro webové rozhraní,
+- Ollama pro lokální jazykové modely,
+- `nomic-embed-text` pro embeddings,
+- NumPy pro vyhledávání podobných částí dokumentu,
+- pypdf pro čtení PDF.
 
-Díky tomu jsou odpovědi přesnější a méně náchylné k halucinacím.
+## Instalace
 
-🏗️ Architektura
-LLM: Llama 3 (běží lokálně přes Ollama)
-Frontend: Streamlit (jednoduché webové UI)
-Znalostní báze: JSON (strukturovaná data)
-Komunikace: lokální inference bez API
-⚙️ Klíčové vlastnosti
-💬 Chat rozhraní s historií (session_state)
-🎯 Nízká temperature (0.1) pro konzistentní odpovědi
-📄 Export odpovědí do .txt
-🧩 Modulární struktura (připraveno na rozšíření)
-📸 Ukázka
+1. Nainstalujte Ollama:
 
-(doporučeno doplnit screenshot aplikace)
+   <https://ollama.com>
 
-🚀 Instalace a spuštění
-1. Instalace Ollama
+2. Stáhněte potřebné modely:
 
-https://ollama.com
+   ```powershell
+   ollama pull llama3
+   ollama pull llama3.2
+   ollama pull nomic-embed-text
+   ```
 
-2. Stažení modelu
+3. Připravte Python prostředí:
 
-ollama pull llama3
+   ```powershell
+   python -m venv venv
+   .\venv\Scripts\activate
+   python -m pip install -r requirements.txt
+   ```
 
-3. Klonování repozitáře
+4. Spusťte aplikaci:
 
-git clone https://github.com/RoganTB/ai-asistent-kusk
-cd ai-asistent-kusk
+   ```powershell
+   streamlit run app.py
+   ```
 
-4. Virtuální prostředí
+## Volitelné nastavení modelů
 
-python -m venv venv
-venv\Scripts\activate # Windows
+Modely je možné změnit přes proměnné prostředí:
 
-source venv/bin/activate # Linux / macOS
-5. Instalace závislostí
-
-pip install streamlit ollama
-
-6. Spuštění aplikace
-
+```powershell
+$env:CHAT_MODEL = "llama3"
+$env:PDF_MODEL = "llama3.2"
+$env:EMBEDDING_MODEL = "nomic-embed-text"
+$env:OLLAMA_URL = "http://localhost:11434"
 streamlit run app.py
+```
 
-📂 Struktura projektu (příklad)
+## Struktura projektu
 
+```text
 .
 ├── app.py
 ├── data.json
 ├── requirements.txt
 └── README.md
+```
 
-📈 Možnosti rozšíření
-📄 Podpora PDF dokumentů
-🧠 Vector databáze (FAISS, ChromaDB)
-🔎 Embeddings-based vyhledávání
-🔐 Role-based access control
-🎨 UI branding
-⚠️ Omezení
-Jednoduchá znalostní báze (JSON)
-Bez embeddings (zatím)
-Proof of concept (ne produkční řešení)
-📌 Status projektu
+## Další kroky
 
-🧪 Prototyp / experimentální řešení
-
-🤝 Možné využití
-státní správa
-interní knowledge base
-HR / IT asistenti
-malé organizace
+- Doplnit reálnou interní znalostní bázi.
+- Přidat trvalé ukládání indexů pro větší sadu dokumentů.
+- Doplnit autentizaci a role pro produkční nasazení.
+- Po ověření sloučené aplikace archivovat nebo odstranit původní repozitář `ai-pdf-assistant`.

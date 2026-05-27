@@ -1,12 +1,22 @@
 {
-  "firma": "Krajský úřad",
+  "organizace": "Krajský úřad",
   "pravidla": {
-    "dovolena": "25 dní dovolené + 7 dní rekondičního volna.",
+    "dovolena": "25 dnů dovolené + 7 dnů rekondičního volna.",
     "pracovni_doba": "Pružná, s pevným jádrem od 9:00 do 14:00.",
     "benefity": "Stravenky, cafeterie, posilovna v budově, příspěvek na penzijní pojištění."
   },
   "kontakty": [
-    {"jmeno": "Jan Novák", "role": "IT Specialista", "email": "novak@urad.cz", "patro": "4"},
-    {"jmeno": "Marie Černá", "role": "HR Manažerka", "email": "cerna@urad.cz", "patro": "2"}
+    {
+      "jmeno": "Jan Novák",
+      "role": "IT specialista",
+      "email": "novak@urad.cz",
+      "patro": "4"
+    },
+    {
+      "jmeno": "Marie Černá",
+      "role": "HR manažerka",
+      "email": "cerna@urad.cz",
+      "patro": "2"
+    }
   ]
 }
